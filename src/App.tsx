@@ -1,17 +1,16 @@
 import { useState } from "react";
+import NavBar from "./scenes/Navbar";
 import viteLogo from "/vite.svg";
+import { SelectedPage } from "@/scenes/shared/types";
 
 function App() {
-  const [count, setCount] = useState(0);
-
+  const [selectedPage, setSelectedPage] = useState<SelectedPage>(
+    SelectedPage.Home
+  );
   return (
-    <div
-      className="
-      bg-red
-     text-white 
-    font-medium
-    "
-    ></div>
+    <div className="bg-gray-20">
+      <NavBar selectedPage={selectedPage} setSelectedPage={setSelectedPage} />
+    </div>
   );
 }
 
