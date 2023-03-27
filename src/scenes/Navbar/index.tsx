@@ -5,6 +5,8 @@ import Logo from "@/assets/Logo.png";
 import Link from "../Link/Link";
 import { SelectedPage } from "../shared/types";
 import useMediaQuery from "@/hooks/useMediaQuery";
+import ActionButton from "../shared/ActionButton";
+import CloseIcon from "@mui/icons-material/Close";
 
 type Props = {
   selectedPage: SelectedPage;
@@ -48,13 +50,15 @@ const NavBar = ({ selectedPage, setSelectedPage }: Props) => {
                 </div>
                 <div className={`${flexBetween} gap-8`}>
                   <p>Sign In</p>
-                  <button>Become a Member</button>
+                  <ActionButton setSelectedPage={setSelectedPage}>
+                    Become a Member
+                  </ActionButton>
                 </div>
               </div>
             ) : (
               <button
                 className="rounded-full bg-secondary-500 p-2"
-                onClick={() => setIsMenuToggled(isMenuToggled)}
+                onClick={() => setIsMenuToggled(!isMenuToggled)}
               >
                 <MenuIcon className="h-6 w-6 text-white" />
               </button>
@@ -62,6 +66,17 @@ const NavBar = ({ selectedPage, setSelectedPage }: Props) => {
           </div>
         </div>
       </div>
+
+      {/* Mobile Menu */}
+      {!isAboveMediumScreens && isMenuToggled && (
+        <div className="fixed right-0 bottom-0 z-40 h-full w-[300px] bg-primary-100 drop-shadow-xl">
+          <div className="flex justify-end p-12">
+            <button onClick={() => setIsMenuToggled(!isMenuToggled)}>
+              <CloseIcon className="h-6 w-6 text-gray-400" />
+            </button>
+          </div>
+        </div>
+      )}
     </nav>
   );
 };
