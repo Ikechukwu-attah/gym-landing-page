@@ -9,18 +9,22 @@ import ActionButton from "../shared/ActionButton";
 import CloseIcon from "@mui/icons-material/Close";
 
 type Props = {
+  isTopOfPage: boolean;
   selectedPage: SelectedPage;
   setSelectedPage: (value: SelectedPage) => void;
 };
 
-const NavBar = ({ selectedPage, setSelectedPage }: Props) => {
+const NavBar = ({ selectedPage, setSelectedPage, isTopOfPage }: Props) => {
   const [isMenuToggled, setIsMenuToggled] = useState<Boolean>(false);
   const flexBetween = "flex items-center justify-between";
   const isAboveMediumScreens = useMediaQuery("(min-width:1060px)");
+  const navbarBackground = isTopOfPage ? "" : "bg-primary-100 drop-shadow";
 
   return (
     <nav>
-      <div className={`${flexBetween} fixed top-0 z-30 w-full py-6`}>
+      <div
+        className={`${navbarBackground}${flexBetween} fixed top-0 z-30 w-full py-6`}
+      >
         <div className={`${flexBetween} mx-auto w-5/6`}>
           <div className={`${flexBetween} w-full gap-16`}>
             <img src={Logo} alt="logo" />
@@ -74,6 +78,30 @@ const NavBar = ({ selectedPage, setSelectedPage }: Props) => {
             <button onClick={() => setIsMenuToggled(!isMenuToggled)}>
               <CloseIcon className="h-6 w-6 text-gray-400" />
             </button>
+          </div>
+
+          {/* Menu Item */}
+          <div className="ml-[33%] flex flex-col gap-10 text-2xl">
+            <Link
+              page="Home"
+              selectedPage={selectedPage}
+              setSelectedPage={setSelectedPage}
+            />
+            <Link
+              page="Benefit"
+              selectedPage={selectedPage}
+              setSelectedPage={setSelectedPage}
+            />
+            <Link
+              page="Our Classes"
+              selectedPage={selectedPage}
+              setSelectedPage={setSelectedPage}
+            />
+            <Link
+              page="Contact Us"
+              selectedPage={selectedPage}
+              setSelectedPage={setSelectedPage}
+            />
           </div>
         </div>
       )}
